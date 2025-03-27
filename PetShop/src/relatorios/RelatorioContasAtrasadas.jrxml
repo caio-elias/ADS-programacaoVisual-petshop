@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioContasAtrasadas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a04d0071-05a9-485e-945e-a60276861394">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="postgresql"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="dataAtual" class="java.sql.Date" nestedType="java.sql.Date"/>
+	<queryString>
+		<![CDATA[select id_parc,data_venc, nome, valor_parcela from conta_parcelas 
+join conta on fk_idconta = id_conta
+join cliente on fk_cliente = id
+where data_venc <  $P{dataAtual} and status =0]]>
+	</queryString>
+	<field name="id_parc" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_parc"/>
+	</field>
+	<field name="data_venc" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="data_venc"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+	</field>
+	<field name="valor_parcela" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="valor_parcela"/>
+	</field>
+	<variable name="valor_parcela1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor_parcela}]]></variableExpression>
+	</variable>
+	<variable name="valor_parcela2" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor_parcela}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="56" splitType="Stretch">
+			<staticText>
+				<reportElement x="16" y="0" width="92" height="17" uuid="7563b0e1-f18e-4b06-9cfd-6d158d6beeb6"/>
+				<text><![CDATA[JONES PET SHOP]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="17" width="533" height="1" uuid="cd391de7-9216-4aa1-ad39-060e9b8bb579"/>
+			</line>
+			<textField>
+				<reportElement x="445" y="0" width="108" height="17" uuid="5c49af75-bfc6-4bc7-80d4-1ec8b1a46365"/>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="30" width="350" height="20" uuid="6c881d9a-c288-4e04-9d75-92bad6244e9c"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO DE CLIENTES EM ATRASO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="19" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="15" y="1" width="100" height="18" uuid="b422ee6f-cdea-40ec-bb5b-296d9cc1861d"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Cod Parcela]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="1" width="80" height="18" uuid="2a9bb582-27ad-4103-80a2-669c7483b568">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="994255fa-5fbf-48a3-8441-3ba9fff1ca7c"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="2" width="80" height="18" uuid="8283b0c8-97ca-41b7-861e-78b8d97310ca"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Venc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="501" y="0" width="43" height="17" uuid="a0344184-ef08-426e-9338-6225a9608007"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<textField>
+				<reportElement x="15" y="0" width="84" height="17" uuid="34e3103a-9b12-4f28-8e94-9ae47fa5bec0"/>
+				<textFieldExpression><![CDATA[$F{id_parc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="236" height="17" uuid="e604386a-40e4-4739-ac16-a2260e9158a1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="994255fa-5fbf-48a3-8441-3ba9fff1ca7c"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="406" y="0" width="54" height="17" uuid="1925fe80-9c76-47b0-b394-fc5c6cb3497a"/>
+				<textFieldExpression><![CDATA[$F{data_venc}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#;(#,##0.00#-)">
+				<reportElement x="510" y="0" width="56" height="17" uuid="811c0b38-a20e-4741-bbe2-bf4b18109349"/>
+				<textFieldExpression><![CDATA[$F{valor_parcela}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="377" y="10" width="124" height="20" uuid="6a4780ed-08d2-4998-aab3-ec70d379329f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total por pagina: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="473" y="50" width="36" height="20" uuid="daecd863-7aed-437e-a991-9158ecd1bee1"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="508" y="50" width="62" height="20" uuid="eeba11e8-9ec2-4334-b3ad-9e6b7d4d678d"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" /" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#;(#,##0.00#-)">
+				<reportElement x="508" y="10" width="55" height="30" uuid="b3c28f33-cbb5-4726-8ba6-cfaf8831c8e7"/>
+				<textFieldExpression><![CDATA[$V{valor_parcela1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="17" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="406" y="10" width="88" height="30" uuid="3a54041f-83ba-42bf-a1b7-76b5f51e1ffb"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total geral: ]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#;(#,##0.00#-)">
+				<reportElement x="508" y="10" width="70" height="30" uuid="60cff16d-8301-4f1b-a516-b704e02547ae"/>
+				<textFieldExpression><![CDATA[$V{valor_parcela2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

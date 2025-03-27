@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f959d4c3-875f-4634-aa11-867266e88534">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="postgresql"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="data1" class="java.sql.Date" nestedType="java.sql.Date"/>
+	<parameter name="data2" class="java.sql.Date" nestedType="java.sql.Date"/>
+	<queryString>
+		<![CDATA[select id_conta,nome,data_venda,total from conta,cliente where data_venda between  $P{data1} and $P{data2} and status = 0 and cliente.id = fk_cliente order by data_venda]]>
+	</queryString>
+	<field name="id_conta" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_conta"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+	</field>
+	<field name="data_venda" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="data_venda"/>
+	</field>
+	<field name="total" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="total"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="30" width="330" height="20" uuid="a2d3da21-d8d9-4516-b94f-0b557004f1b8"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO PERIÓDICO DE VENDAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="0" width="92" height="17" uuid="5d210c60-be9e-476c-9e30-631f27b93ccc"/>
+				<text><![CDATA[JONES PET SHOP]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="445" y="0" width="108" height="17" uuid="3833211f-37df-47cf-8955-d1d1ee9e152f"/>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date())]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="10" y="17" width="533" height="1" uuid="98415093-d766-40fd-a1c8-4fdcd672d608"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="0" width="30" height="18" uuid="1c51118b-4011-453b-b8e2-b7df113ae5f9"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[De]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="0" width="55" height="18" uuid="45e8279d-2a77-4840-928d-06aad7ca5ec3"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{data1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="120" y="0" width="10" height="18" uuid="e5c8146f-6d02-4a3e-803f-7d5e0e53cca6"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[a]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="135" y="0" width="60" height="18" uuid="38cdaeef-0bd2-4a52-90f6-f4ac0515f015"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{data2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="380" y="2" width="39" height="18" uuid="05578bf9-06cc-4fec-a51b-8754ff1d454d"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="115" y="1" width="80" height="18" uuid="1031042f-3fda-44ea-8e6d-cb144a59450d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="994255fa-5fbf-48a3-8441-3ba9fff1ca7c"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="1" width="80" height="18" uuid="1dd9707a-8cf4-43c7-a638-0bb3fc4c3fa0"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Cod Conta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="467" y="0" width="43" height="17" uuid="99feebed-289b-47c9-9c12-e5edb73ed77f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement x="15" y="-3" width="84" height="17" uuid="98db4ae3-0a33-42a0-89fd-1abaa08a9f1f"/>
+				<textFieldExpression><![CDATA[$F{id_conta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="114" y="-3" width="236" height="17" uuid="3e67dd68-eba3-41b4-b41c-f6395e3df437">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="994255fa-5fbf-48a3-8441-3ba9fff1ca7c"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="366" y="-3" width="54" height="17" uuid="3f8f6f91-5781-4d31-9786-6d47325cee72"/>
+				<textFieldExpression><![CDATA[$F{data_venda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="-3" width="56" height="17" uuid="51aee39b-d6be-4231-883e-5c48c533d2f9"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="52" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="64" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
